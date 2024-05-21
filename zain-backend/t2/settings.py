@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'account',
     'ckeditor',
     'rest_framework_simplejwt',
+    'simple_history',
 ]
 
 MIDDLEWARE = [
@@ -63,6 +64,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'simple_history.middleware.HistoryRequestMiddleware',
+    
       # for cors
 ]
 #Middleware Order:
