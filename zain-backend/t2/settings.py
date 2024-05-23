@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -164,10 +164,38 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000"
+    "http://localhost:3000",
+    "http://localhost:4000",
+    "https://d513-203-128-11-19.ngrok-free.app ",
+]
+CSRF_TRUSTED_ORIGINS=[
+    "http://localhost:3000",
+    "http://localhost:4000",
+    "https://d513-203-128-11-19.ngrok-free.app ",
+    
 ]
 
+ALLOWED_HOSTS = ["127.0.0.1","localhost","d513-203-128-11-19.ngrok-free.app"]
 
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "authorization",
+    "content-type",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+    "ngrok-skip-browser-warning",
+]
+
+CORS_ALLOW_ALL_ORIGINS = True  
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
 
 
 AUTH_USER_MODEL = 'account.User'
@@ -233,3 +261,5 @@ ELASTICSEARCH_DSL = {
         'hosts': 'localhost:9200'
     },
 }
+
+CSRF_COOKIE_SECURE = False
