@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     'ckeditor',
     'rest_framework_simplejwt',
     'simple_history',
+    'django_elasticsearch_dsl',
+    'django_elasticsearch_dsl_drf',
 ]
 
 MIDDLEWARE = [
@@ -258,7 +260,8 @@ CELERY_TIMEZONE = 'Asia/Karachi'
 
 ELASTICSEARCH_DSL = {
     'default': {
-        'hosts': 'localhost:9200'
+        'hosts': 'localhost:9200',
+        'timeout': 70,
     },
 }
 
