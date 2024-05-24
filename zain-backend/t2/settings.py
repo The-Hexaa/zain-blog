@@ -264,5 +264,8 @@ ELASTICSEARCH_DSL = {
         'timeout': 70,
     },
 }
+ELASTICSEARCH_INDEX_NAMES = { 
+    'posts.post': 'posts'
+}
 
 CSRF_COOKIE_SECURE = False
