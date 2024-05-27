@@ -168,16 +168,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:4000",
-    "https://d513-203-128-11-19.ngrok-free.app ",
+    "https://fd0c-203-128-11-19.ngrok-free.app",
 ]
 CSRF_TRUSTED_ORIGINS=[
     "http://localhost:3000",
     "http://localhost:4000",
-    "https://d513-203-128-11-19.ngrok-free.app ",
+    "https://fd0c-203-128-11-19.ngrok-free.app",
     
 ]
 
-ALLOWED_HOSTS = ["127.0.0.1","localhost","d513-203-128-11-19.ngrok-free.app"]
+ALLOWED_HOSTS = ["127.0.0.1","localhost","fd0c-203-128-11-19.ngrok-free.app"]
 
 CORS_ALLOW_HEADERS = [
     "accept",
@@ -269,3 +269,6 @@ ELASTICSEARCH_INDEX_NAMES = {
 }
 
 CSRF_COOKIE_SECURE = False
+
+
+MAX_OTP_TRY = 3
