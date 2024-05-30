@@ -164,21 +164,22 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+HOSTING_URL = 'https://'+os.environ.get('HOSTING')
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:4000",
-    "https://fd0c-203-128-11-19.ngrok-free.app",
+    HOSTING_URL,
 ]
+print(CORS_ALLOWED_ORIGINS)
 CSRF_TRUSTED_ORIGINS=[
     "http://localhost:3000",
     "http://localhost:4000",
-    "https://fd0c-203-128-11-19.ngrok-free.app",
+    HOSTING_URL,
     
 ]
 
-ALLOWED_HOSTS = ["127.0.0.1","localhost","fd0c-203-128-11-19.ngrok-free.app"]
-
+ALLOWED_HOSTS = ["127.0.0.1","localhost",os.environ.get('HOSTING')]
+print(ALLOWED_HOSTS)
 CORS_ALLOW_HEADERS = [
     "accept",
     "authorization",
