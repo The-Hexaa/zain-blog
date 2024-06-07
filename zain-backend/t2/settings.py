@@ -40,6 +40,8 @@ EMAIL_USE_TLS = True
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -50,6 +52,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'blog',
     'account',
+    'notification',
     'ckeditor',
     'rest_framework_simplejwt',
     'simple_history',
@@ -94,8 +97,20 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 't2.wsgi.application'
+# WSGI_APPLICATION = 't2.wsgi.application'
+ASGI_APPLICATION = 't2.asgi.application'
 
+CHANNEL_LAYERS = {
+    # 'default': {
+    #     'BACKEND': 'channels_redis.core.RedisChannelLayer',
+    #     'CONFIG': {
+    #         "hosts": [('127.0.0.1', 6379)],
+    #     },
+    # },
+        "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
