@@ -49,17 +49,48 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corsheaders',
+    'django.contrib.sites',
     'rest_framework',
+    'corsheaders',
     'blog',
     'account',
     'notification',
+    'rest_framework.authtoken',
     'ckeditor',
     'rest_framework_simplejwt',
     'simple_history',
     'django_elasticsearch_dsl',
     'django_elasticsearch_dsl_drf',
+    'social_django',
 ]
+
+LOGIN_REDIRECT_URL = '/'
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '944391205578-jftpodvt0g39nb19q6loat2n0rv6s6hf.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+SOCIAL_AUTH_FACEBOOK_KEY = '1642577126576570'
+SOCIAL_AUTH_FACEBOOK_SECRET = '9a81482aed53d585a321d0336fba27e1'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -233,6 +264,7 @@ REST_FRAMEWORK = {
     )
 }
 AUTHENTICATION_BACKENDS = (
+    'social_core.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
 
@@ -297,3 +329,4 @@ CSRF_COOKIE_SECURE = False
 
 
 MAX_OTP_TRY = 3
+USER_MODEL_USERNAME_FIELD = 'email'
