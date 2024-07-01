@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'blog',
     'account',
     'notification',
+    'commerce',
     'rest_framework.authtoken',
     'ckeditor',
     'rest_framework_simplejwt',
