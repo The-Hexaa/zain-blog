@@ -224,12 +224,14 @@ HOSTING_URL = 'https://'+os.environ.get('HOSTING')
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:4000",
+    "http://localhost:4001",
     HOSTING_URL,
 ]
 print(CORS_ALLOWED_ORIGINS)
 CSRF_TRUSTED_ORIGINS=[
     "http://localhost:3000",
     "http://localhost:4000",
+    "http://localhost:4001s",
     HOSTING_URL,
     
 ]
