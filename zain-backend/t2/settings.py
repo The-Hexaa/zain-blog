@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'blog',
     'account',
     'notification',
+    'commerce',
     'rest_framework.authtoken',
     'ckeditor',
     'rest_framework_simplejwt',
@@ -223,12 +224,14 @@ HOSTING_URL = 'https://'+os.environ.get('HOSTING')
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:4000",
+    "http://localhost:4001",
     HOSTING_URL,
 ]
 print(CORS_ALLOWED_ORIGINS)
 CSRF_TRUSTED_ORIGINS=[
     "http://localhost:3000",
     "http://localhost:4000",
+    "http://localhost:4001s",
     HOSTING_URL,
     
 ]
@@ -330,3 +333,7 @@ CSRF_COOKIE_SECURE = False
 
 MAX_OTP_TRY = 3
 USER_MODEL_USERNAME_FIELD = 'email'
+
+
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
+STRIPE_PUBLISHABLE_KEY = os.environ.get('STRIPE_PUBLISHABLE_KEY')
