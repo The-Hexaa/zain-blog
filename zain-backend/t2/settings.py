@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 from datetime import timedelta
 import os
+from django.core.cache import cache
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,22 +41,57 @@ EMAIL_USE_TLS = True
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corsheaders',
+    'django.contrib.sites',
     'rest_framework',
+    'corsheaders',
     'blog',
     'account',
+    'notification',
+    'commerce',
+    'rest_framework.authtoken',
     'ckeditor',
     'rest_framework_simplejwt',
     'simple_history',
     'django_elasticsearch_dsl',
     'django_elasticsearch_dsl_drf',
+    'social_django',
 ]
+
+LOGIN_REDIRECT_URL = '/'
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '944391205578-jftpodvt0g39nb19q6loat2n0rv6s6hf.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+SOCIAL_AUTH_FACEBOOK_KEY = '1642577126576570'
+SOCIAL_AUTH_FACEBOOK_SECRET = '9a81482aed53d585a321d0336fba27e1'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -94,8 +130,20 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 't2.wsgi.application'
+# WSGI_APPLICATION = 't2.wsgi.application'
+ASGI_APPLICATION = 't2.asgi.application'
 
+CHANNEL_LAYERS = {
+    # 'default': {
+    #     'BACKEND': 'channels_redis.core.RedisChannelLayer',
+    #     'CONFIG': {
+    #         "hosts": [('127.0.0.1', 6379)],
+    #     },
+    # },
+        "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -112,6 +160,18 @@ DATABASES = {
         'PASSWORD': 'Root@12',
         'HOST': '127.0.0.1',
         'PORT': '3307',
+    }
+}
+
+
+CACHES = {
+    # "default": {
+    #     "BACKEND": "django.core.cache.backends.redis.RedisCache",
+    #     "LOCATION": "redis://127.0.0.1:6379",
+    # }
+    "default": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+        "LOCATION": "unique-snowflake",  # This can be any unique identifier for your cache
     }
 }
 
@@ -168,12 +228,14 @@ HOSTING_URL = 'https://'+os.environ.get('HOSTING')
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:4000",
+    "http://localhost:4001",
     HOSTING_URL,
 ]
 print(CORS_ALLOWED_ORIGINS)
 CSRF_TRUSTED_ORIGINS=[
     "http://localhost:3000",
     "http://localhost:4000",
+    "http://localhost:4001s",
     HOSTING_URL,
     
 ]
@@ -209,6 +271,7 @@ REST_FRAMEWORK = {
     )
 }
 AUTHENTICATION_BACKENDS = (
+    'social_core.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
 
@@ -273,3 +336,8 @@ CSRF_COOKIE_SECURE = False
 
 
 MAX_OTP_TRY = 3
+USER_MODEL_USERNAME_FIELD = 'email'
+
+
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
+STRIPE_PUBLISHABLE_KEY = os.environ.get('STRIPE_PUBLISHABLE_KEY')
